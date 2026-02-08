@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>Green Earth</title>
+</head>
+
+<body>
+    <nav class="w-full h-16 flex items-center justify-between px-20 bg-[#15803D] text-white">
+        <p class="font-semibold hidden md:block text-xl mx-auto md:mx-0 text-center">Green Earth</p>
+        <div class="md:space-x-5 space-x-2">
+            <p class="font-semibold md:hidden text-xl mx-auto md:mx-0 text-center">Green Earth</p>
+            <a href="">About</a>
+            <a href="">Gallery</a>
+            <a href="">Plant a Tree</a>
+        </div>
+        <button
+            class="w-35 h-10 border border-[#15803D] rounded-3xl bg-yellow-500 text-[#15803D] text-lg hover:bg-yellow-600 hidden md:block">Plant
+            a Tree</button>
+    </nav>
+    <section class="bg-[#CFF0DC] flex flex-col md:justify-between md:items-center md:flex-row">
+        <img src="./assets/hero-leaf1.png" alt="">
+        <div class="space-y-5 flex flex-col items-center p-5 mt-2">
+            <h1 class="font-bold text-3xl text-center">Plant a Tree, Grow a Future</h1>
+            <p class="text-[18px] text-center">Join our mission to plant 1 million trees and make the Earth greener for
+                future generations.</p>
+            <button
+                class="w-35 h-10 flex justify-center items-center border border-[#CFF0DC] rounded-3xl bg-yellow-500 text-[#15803D] text-lg hover:bg-yellow-600">Get
+                Involved</button>
+        </div>
+        <img src="./assets/hero-leaf2.png" alt="" class="hidden md:block">
+    </section>
+    <section class="bg-[#DCFCE770] py-10 px-20">
+        <div class="max-w-7xl mx-auto px-6 pt-10 pb-6">
+            <h1 class="text-3xl font-bold text-center text-[#1F2937]">Choose Your Trees</h1>
+        </div>
+
+        <div class="max-w-[1400px] mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+            <div class="lg:col-span-2 space-y-2">
+                <h2 class="font-bold text-xl mb-4">Categories</h2>
+
+                <nav class="space-y-1 text-sm font-medium flex flex-wrap md:block">
+                    <p onclick="loadAllTrees()"
+                        class="cursor-pointer block p-2 text-[#1F2937] text-lg hover:bg-green-700 hover:text-white rounded-md">
+                        All Trees
+                    </p>
+                    <div id="allCategory">
+                    </div>
+                </nav>
+            </div>
+
+            <div class="lg:col-span-7">
+                <div id="all-trees" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                </div>
+            </div>
+            <div class="lg:col-span-3">
+                <div class="bg-gray-50 p-4 rounded-lg h-[795px]">
+                    <h2 class="font-bold text-lg mb-6 text-gray-800">Your Cart</h2>
+
+                    <div id="cart">
+                        <!-- <div>
+                            <p class="text-[#1F2937] font-semibold text-[15px] mb-2">Mango Tree</p>
+                            <p class="text-gray-500 text-lg">৳500 x 1</p>
+                        </div>
+                        <button class="text-gray-400 hover:text-red-500 text-lg cursor-pointer">X</button> -->
+                    </div>
+
+                    <div id="total"></div>
+                    <!-- <div class="border-t border-gray-300 my-6"></div>
+
+                    <div class="flex justify-between items-center font-bold text-gray-800">
+                        <span>Total:</span>
+                        <span id="total"></span>
+                    </div> -->
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <script src="script.js"></script>
+</body>
+
+</html>
