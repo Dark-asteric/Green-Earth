@@ -1,3 +1,8 @@
+// const createElements = (arr) => {
+//     const htmlElements = arr.map((el) => `<span class="btn">${el}</span>`);
+
+// }
+
 const loadAllTrees = () => {
     fetch("https://openapi.programming-hero.com/api/plants")
     .then(res => res.json())
