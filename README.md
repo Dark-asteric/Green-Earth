@@ -1,5 +1,5 @@
 ---
-#### 7) Create a README file to answer the following question-
+#### 7) A README file to answer the following questions -
 
 
 #### i) What is the difference between var, let, and const?
