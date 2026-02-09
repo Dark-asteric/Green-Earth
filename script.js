@@ -1,7 +1,14 @@
 const loadAllTrees = () => {
     fetch("https://openapi.programming-hero.com/api/plants")
     .then(res => res.json())
-    .then(data => displayAllTrees(data.plants))
+    .then(data => {
+        const clickbtn = document.getElementById(`category-btn-0`);
+        console.log(clickbtn);
+        removeActive();
+        clickbtn.classList.add("active");
+        displayAllTrees(data.plants);
+    }
+    )
 };
 
 const displayAllTrees = (trees) => {
@@ -13,7 +20,7 @@ const displayAllTrees = (trees) => {
         treeDiv.innerHTML = `
             <div class="bg-white p-3 rounded-xl shadow-sm border border-gray-100 flex flex-col">
                 <img src="${tree.image}" class="h-38 w-full bg-gray-200 rounded-lg mb-3"></img>
-                <h3 class="font-bold text-sm text-gray-800">${tree.name}</h3>
+                <h3 class="font-bold text-sm text-gray-800" onclick="loadTreeDetails(${tree.id})">${tree.name}</h3>
                 <p class="text-[10px] text-gray-500 mt-1 leading-tight mb-3">
                     ${tree.description}
                 </p>
@@ -30,6 +37,27 @@ const displayAllTrees = (trees) => {
     });
 };
 
+const loadTreeDetails = async (id) => {
+    const url = `https://openapi.programming-hero.com/api/plant/${id}`;
+    const res = await fetch(url)
+    const data = await res.json();
+    displayTreeDetails(data.plants);
+}
+
+const displayTreeDetails = (plant) => {
+    const showDetails = document.getElementById("show-details");
+    showDetails.innerHTML = `
+            <h1 class="font-bold text-600 text-lg mb-4">${plant.name}</h1>
+            <img src="${plant.image}" alt="" class="rounded-lg w-full object-cover mb-4 max-h-[250px]">
+            <div class="space-y-2">
+                <p><span class="font-bold text-md">Category : </span>${plant.category}</p>
+                <p><span class="font-bold text-md">Price : </span>$${plant.price}</p>
+                <p><span class="font-bold text-md">Description : </span>${plant.description}</p>
+            </div>
+        `;
+    document.getElementById("my_modal_5").showModal();
+}
+
 const allCategory = () => {
     fetch("https://openapi.programming-hero.com/api/categories")
         .then(res => res.json())
@@ -42,10 +70,16 @@ const displayCategory = (category) => {
     category.forEach(cat => {
         const catDiv = document.createElement("div");
         catDiv.innerHTML = `
-            <button onclick="loadByCategory(${cat.id})" class="cursor-pointer block p-2 text-[#1F2937] text-lg hover:bg-green-700 hover:text-white rounded-md">${cat.category_name}</button> 
+            <button id="category-btn${cat.id}" onclick="loadByCategory(${cat.id})" class="category-btn cursor-pointer block p-2 text-[#1F2937] text-lg hover:bg-green-700 hover:text-white rounded-md">${cat.category_name}</button> 
         `;
         allCategory.appendChild(catDiv);
     });
+}
+
+const removeActive = () =>{
+    const categoryButtons = document.querySelectorAll(".category-btn");
+    console.log(categoryButtons);
+    categoryButtons.forEach((btn) => btn.classList.remove("active"));
 }
 
 const loadByCategory = (id) =>{
@@ -53,7 +87,14 @@ const loadByCategory = (id) =>{
     console.log(url);
     fetch(url)
     .then(res => res.json())
-    .then(data => displayByCategory(data.plants));
+    .then(data => {
+        const clickbtn = document.getElementById(`category-btn${id}`);
+        console.log(clickbtn);
+        removeActive();
+        clickbtn.classList.add("active");
+        displayByCategory(data.plants)
+    }
+    );
 }
 
 const displayByCategory = (plants) =>{
@@ -64,7 +105,7 @@ const displayByCategory = (plants) =>{
         treesDiv.innerHTML = `
             <div class="bg-white p-3 rounded-xl shadow-sm border border-gray-100 flex flex-col">
                 <img src="${plant.image}" class="h-38 w-full bg-gray-200 rounded-lg mb-3"></img>
-                <h3 class="font-bold text-sm text-gray-800">${plant.name}</h3>
+                <h3 class="font-bold text-sm text-gray-800" onclick="loadTreeDetails(${plant.id})">${plant.name}</h3>
                 <p class="text-[10px] text-gray-500 mt-1 leading-tight mb-3">
                     ${plant.description}
                 </p>
