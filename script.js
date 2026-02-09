@@ -3,7 +3,19 @@
 
 // }
 
+const loading = (status) => {
+    if(status == true){
+        document.getElementById("loading").classList.remove("hidden");
+        document.getElementById("all-trees").classList.add("hidden");
+    }
+    else{
+        document.getElementById("loading").classList.add("hidden");
+        document.getElementById("all-trees").classList.remove("hidden");
+    }
+}
+
 const loadAllTrees = () => {
+    loading(true);
     fetch("https://openapi.programming-hero.com/api/plants")
     .then(res => res.json())
     .then(data => {
@@ -40,6 +52,7 @@ const displayAllTrees = (trees) => {
         `;
         treesContainer.appendChild(treeDiv);
     });
+    loading(false);
 };
 
 const loadTreeDetails = async (id) => {
@@ -88,6 +101,7 @@ const removeActive = () =>{
 }
 
 const loadByCategory = (id) =>{
+    loading(true);
     const url = `https://openapi.programming-hero.com/api/category/${id}`;
     console.log(url);
     fetch(url)
@@ -100,6 +114,7 @@ const loadByCategory = (id) =>{
         displayByCategory(data.plants)
     }
     );
+    
 }
 
 const displayByCategory = (plants) =>{
@@ -125,6 +140,7 @@ const displayByCategory = (plants) =>{
         `;
         treesByCategory.appendChild(treesDiv);
     });
+    loading(false);
 }
 const loadToCart = (id) =>{
     const url = `https://openapi.programming-hero.com/api/plant/${id}`;
